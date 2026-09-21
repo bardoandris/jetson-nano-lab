@@ -10,7 +10,7 @@ client = OpenAI(
 completion = client.chat.completions.create(
     model=MODEL_NAME,
     messages=[{"role": "user", "content": "Hello!"}],
-    temperature=0.7,
+    temperature=1.0,
     max_tokens=1000,
 )
 
