@@ -9,8 +9,8 @@ client = OpenAI(
 
 completion = client.chat.completions.create(
     model=MODEL_NAME,
-    messages=[{"role": "user", "content": "Hello!"}],
-    temperature=1.8,
+    messages=[{"role": "user", "content": "Hello!,please write down your first chess move with reasoning!"}],
+    temperature=1.0,
     max_tokens=1000,
 )
 
