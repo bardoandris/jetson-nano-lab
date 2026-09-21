@@ -11,7 +11,7 @@ completion = client.chat.completions.create(
     model=MODEL_NAME,
     messages=[{"role": "user", "content": "Hello!"}],
     temperature=0.7,
-    max_tokens=128,
+    max_tokens=1000,
 )
 
 print(completion.choices[0].message.content)
