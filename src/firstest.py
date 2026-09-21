@@ -1,6 +1,6 @@
 import argparse
 import base64
-import imghdr
+import mimetypes
 from pathlib import Path
 
 from openai import OpenAI
@@ -9,18 +9,17 @@ MODEL_NAME = "unsloth/gemma-4-E2B-it-GGUF:Q4_K_S"
 
 
 def detect_image_mime_type(image_path: str) -> str:
-    kind = imghdr.what(image_path)
-    mime_map = {
-        "png": "image/png",
-        "jpeg": "image/jpeg",
-        "jpg": "image/jpeg",
-        "gif": "image/gif",
-        "bmp": "image/bmp",
-        "webp": "image/webp",
+    mime_type, _ = mimetypes.guess_type(image_path)
+    allowed_types = {
+        "image/png",
+        "image/jpeg",
+        "image/gif",
+        "image/bmp",
+        "image/webp",
     }
-    if kind not in mime_map:
+    if mime_type not in allowed_types:
         raise ValueError(f"Unsupported image type: {image_path}")
-    return mime_map[kind]
+    return mime_type
 
 
 def read_image_as_data_url(image_path: str) -> str:
