@@ -44,25 +44,28 @@ client = OpenAI(
     api_key="not-needed",  # llama.cpp / OpenAI-compatible servers often ignore this
 )
 
-completion = client.responses.create(
+completion = client.chat.completions.create(
     model=MODEL_NAME,
-    instructions=(
-        "Given the image, how many apples are present in the image? "
-        "Answer the question with only a number (eg. 1, 10, 0)."
-    ),
-    temperature=0.2,
-    input=[
+    messages=[
         {
             "role": "user",
             "content": [
                 {
-                    "type": "input_image",
-                    "image_url": image_data_url,
-                }
+                    "type": "text",
+                    "text": (
+                        "Given the image, how many apples are present in the image? "
+                        "Answer the question with only a number (eg. 1, 10, 0)."
+                    ),
+                },
+                {
+                    "type": "image_url",
+                    "image_url": {"url": image_data_url},
+                },
             ],
         }
     ],
+    temperature=0.2,
     max_tokens=10,
 )
 
-print(getattr(completion, "output_text", ""))
+print(completion.choices[0].message.content)
