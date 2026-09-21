@@ -54,7 +54,7 @@ completion = client.chat.completions.create(
                     "type": "text",
                     "text": (
                         "Given the image, how many apples are present in the image? "
-                        "Answer the question with only a number (eg. 1, 10, 0)."
+                        "Answer the question with only a number (eg. 1, 7, 0)."
                     ),
                 },
                 {
@@ -64,7 +64,7 @@ completion = client.chat.completions.create(
             ],
         }
     ],
-    temperature=0.2,
+    temperature=0.8,
     max_tokens=10_000,
 )
 
